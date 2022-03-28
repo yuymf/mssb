@@ -40,6 +40,38 @@ def plot4dwitha(data,file_name):       # data第一个数据为颜色
                          auto_open=True,
                          filename=file_name)
 
+def plotknn(features,lable,prepoint,file_name):       # data第一个数据为颜色
+    prepoint=[prepoint[1],prepoint[2],prepoint[3]]
+    prepoint=np.array(prepoint)
+    vector = go.Scatter3d(x=[0, prepoint[0]], y=[0,prepoint[1]], z=[0,prepoint[2]],
+                          marker=dict(size=1, color="rgb(84,48,5)"), line=dict(color="rgb(84,48,5)", width=6)
+                          )
+    markersize = normal(features[3],10,4)  # 体重
+    #Make Plotly figure
+    colorsize=(lable+1)*8
+    fig1 = go.Scatter3d(x=features[0],
+                        y=features[1],
+                        z=features[2],
+                        marker=dict(size=markersize,
+                                    color=colorsize,
+                                    opacity=0.9,
+                                    reversescale=True,
+                                    colorscale='Viridis'),
+                        line=dict (width=0.02),
+                        mode='markers')
+
+    #Make Plot.ly Layout
+    point=[fig1,vector]
+    mylayout = go.Layout(scene=dict(xaxis=dict( title="肺活量"),
+                                    yaxis=dict( title="50米成绩"),
+                                    zaxis=dict(title="身高")),
+                         margin=dict(l=0, r=0,  b=0, t=0)
+                         )
+    #Plot and save html
+    plotly.offline.plot({"data": point,
+                         "layout": mylayout},
+                         auto_open=True,
+                         filename=file_name)
 
 def plot4d(data,file_name):       # data第一个数据为颜色
     markersize = normal(data[4],10,4)       #体重
@@ -94,36 +126,6 @@ def plotla(features,lable,file_name):       # data第一个数据为颜色
                          auto_open=True,
                          filename=file_name)
 
-def plotknn(features,lable,prepoint,file_name):       # data第一个数据为颜色
-    markersize = normal(features[3],10,4)  # 体重
-    #Make Plotly figure
-    colorsize=(lable+1)*8
-    vector = go.Scatter3d(x=[0, prepoint[0]], y=[0,prepoint[1]], z=[0,prepoint[2]],
-                          marker=dict(size=1, color="rgb(84,48,5)"), line=dict(color="rgb(84,48,5)", width=6)
-                          )
-    fig1 = go.Scatter3d(x=features[0],
-                        y=features[1],
-                        z=features[2],
-                        marker=dict(size=markersize,
-                                    color=colorsize,
-                                    opacity=0.9,
-                                    reversescale=True,
-                                    colorscale='Viridis'),
-                        line=dict (width=0.02),
-                        mode='markers')
-
-    #Make Plot.ly Layout
-    point=[fig1,vector]
-    mylayout = go.Layout(scene=dict(xaxis=dict( title="肺活量"),
-                                    yaxis=dict( title="50米成绩"),
-                                    zaxis=dict(title="身高")),
-                         margin=dict(l=0, r=0,  b=0, t=0)
-                         )
-    #Plot and save html
-    plotly.offline.plot({"data": point,
-                         "layout": mylayout},
-                         auto_open=True,
-                         filename=file_name)
 #计算欧式距离
 def ed(m, n):
     return np.sqrt(np.sum((m - n) ** 2))
