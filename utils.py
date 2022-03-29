@@ -40,7 +40,7 @@ def plot4dwitha(data,file_name):       # data第一个数据为颜色
                          auto_open=True,
                          filename=file_name)
 
-def plotknn(features,lable,prepoint,file_name):       # data第一个数据为颜色
+def plotknn(features,lable,prepoint,neighbors,file_name):       # data第一个数据为颜色
     point=[prepoint[0,0],prepoint[0,1],prepoint[0,2]]
     point=np.array(point)
     point_pre = go.Scatter3d(x=[point[0]], y=[point[1]], z=[point[2]],
@@ -48,6 +48,7 @@ def plotknn(features,lable,prepoint,file_name):       # data第一个数据为�
                                       color="rgb(255,0,0)"), 
                           line=dict(color="rgb(255,0,0)", width=6),                          
                           mode='markers')
+ 
     markersize = normal(features[3],10,4)  # 体重
     #Make Plotly figure
     colorsize=(lable+1)*8
@@ -64,6 +65,15 @@ def plotknn(features,lable,prepoint,file_name):       # data第一个数据为�
 
     #Make Plot.ly Layout
     points=[fig1,point_pre]
+
+    for i in neighbors[0]:
+    # plt.plot([X[i][0], X_sample[0][0]], [X[i][1], X_sample[0][1]], 
+    #          '-.', linewidth=0.6);  
+        vector = go.Scatter3d(x=[features[0][i], point[0]], y=[features[1][i], point[1]], z=[features[2][i], point[2]],
+                                marker=dict(size=1, color="rgb(84,48,5)"), line=dict(color="rgb(84,48,5)", width=6)
+                             )
+        points.append(vector)
+            
     mylayout = go.Layout(scene=dict(xaxis=dict( title="肺活量"),
                                     yaxis=dict( title="50米成绩"),
                                     zaxis=dict(title="身高")),
