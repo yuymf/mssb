@@ -9,7 +9,7 @@ def normal(x,Max,Min):
 
 def plot4dwitha(data,file_name):       # data第一个数据为颜色
     cen=[data[1].mean(),data[2].mean(),data[3].mean()]
-    cen=np.array(cen)
+    cen=np.array(cen)  
     vector = go.Scatter3d(x=[0, cen[0]], y=[0,cen[1]], z=[0,cen[2]],
                           marker=dict(size=1, color="rgb(84,48,5)"), line=dict(color="rgb(84,48,5)", width=6)
                           )
@@ -41,10 +41,13 @@ def plot4dwitha(data,file_name):       # data第一个数据为颜色
                          filename=file_name)
 
 def plotknn(features,lable,prepoint,file_name):       # data第一个数据为颜色
-    prepoint=[prepoint[1],prepoint[2],prepoint[3]]
-    prepoint=np.array(prepoint)
-    vector = go.Scatter3d(x=[0, prepoint[0]], y=[0,prepoint[1]], z=[0,prepoint[2]],
-                          marker=dict(size=1, color="rgb(84,48,5)"), line=dict(color="rgb(84,48,5)", width=6)
+    point=[prepoint[0][1],prepoint[0][2],prepoint[0][3]]
+    point=np.array(prepoint)
+    point_pre = go.Scatter3d(x=point[0], y=point[1], z=point[2],
+                          marker=dict(size=1, 
+                                      color="rgb(84,48,5)"), 
+                          line=dict(color="rgb(84,48,5)", width=6),
+                          mode='markers'
                           )
     markersize = normal(features[3],10,4)  # 体重
     #Make Plotly figure
@@ -61,7 +64,7 @@ def plotknn(features,lable,prepoint,file_name):       # data第一个数据为�
                         mode='markers')
 
     #Make Plot.ly Layout
-    point=[fig1,vector]
+    point=[fig1,point_pre]
     mylayout = go.Layout(scene=dict(xaxis=dict( title="肺活量"),
                                     yaxis=dict( title="50米成绩"),
                                     zaxis=dict(title="身高")),
