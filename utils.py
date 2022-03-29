@@ -41,7 +41,7 @@ def plot4dwitha(data,file_name):       # data第一个数据为颜色
                          filename=file_name)
 
 def plotknn(features,lable,prepoint,file_name):       # data第一个数据为颜色
-    point=[prepoint[0][1],prepoint[0][2],prepoint[0][3]]
+    point=[prepoint[0,1],prepoint[0,2],prepoint[0,3]]
     point=np.array(prepoint)
     point_pre = go.Scatter3d(x=point[0], y=point[1], z=point[2],
                           marker=dict(size=1, 
