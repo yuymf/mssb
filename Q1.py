@@ -38,7 +38,7 @@ for train_index, test_index in kf.split(data):
     lda = LDA(n_components=1)
     lda.fit(x_train_pca, y_train)
     lda_pred=lda.predict(x_test_pca)
-    se,sp,acc,auc =score(lda_pred,y_test)
+    se,sp,acc,auc =eval(lda_pred,y_test)
     se_all.append(se);sp_all.append(sp);acc_all.append(acc);auc_all.append(auc)
 
 show(se_all);show(sp_all);show(acc_all);show(auc_all)
