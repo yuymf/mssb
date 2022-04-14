@@ -8,6 +8,7 @@ from sklearn.preprocessing import OrdinalEncoder
 from sklearn import tree
 from sklearn.tree import DecisionTreeClassifier
 import graphviz
+import os
 
 
 def pre_data():
@@ -15,7 +16,7 @@ def pre_data():
     考虑到不同特征属于不同的量级，需要进行标准化处理
     :return: 处理后的特征数据和标签数据
     """
-    file_loc = "作业数据_2021合成.xls"
+    file_loc = os.path.join('data','作业数据_2021合成.xls')
     file_data = pd.read_excel(file_loc)
     data_color = file_data[["喜欢颜色"]]
     ordinal_encoder = OrdinalEncoder()
